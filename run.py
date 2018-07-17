@@ -21,7 +21,6 @@ logger.debug('Starting')
 
 api_key, api_secret = os.environ['BITMEX_API_KEY'], os.environ['BITMEX_API_SECRET']
 
-
 client = bitmex.bitmex(
     test=True,
     api_key=api_key,
@@ -31,7 +30,7 @@ client = bitmex.bitmex(
 logger.debug('Connected to bitmex')
 
 strategy = MAStrategy(client, timeframe='1d', mas=1, mal=7)
-trader = Trader(client, strategy,money_to_trade=4000,leverage=1)
+trader = Trader(client, strategy, money_to_trade=4000, leverage=1)
 trader.execute_trade()
 
 logger.info('Done')

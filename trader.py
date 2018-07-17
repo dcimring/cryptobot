@@ -14,25 +14,30 @@ class Trader():
         self.leverage = leverage
         
     def execute_trade(self):
+        
         decision = self.strategy.run()
+        self.logger.info('Strategy %s decision %s',self.strategy.name, decision)
         
-        self.logger.info('Decision %d',decision)
-        #print(f"Last decision: {decision}")
-        
-        # try:
-        #     if decision == -1:
-        #         response = self.client.Order.Order_new(
-        #             symbol="XBTUSD",
-        #             side="Sell",
-        #             orderQty=self.money_to_trade * self.leverage,
-        #         ).result()
-        #     if decision == 1:
-        #         response = self.client.Order.Order_new(
-        #             symbol="XBTUSD",
-        #             side="Buy",
-        #             orderQty=self.money_to_trade * self.leverage,
-        #         ).result()
-        # except Exception:
-        #     print("Something goes wrong!")
+        try:
+            if decision == "SELL":
+                self.logger.info("Trying to %s %0.2f",decision,self.money_to_trade * self.leverage)
+                response = self.client.Order.Order_new(
+                    symbol="XBTUSD",
+                    side="Sell",
+                    orderQty=self.money_to_trade * self.leverage,
+                ).result()
+
+            if decision == "BUY":
+                self.logger.info("Trying to %s %0.2f",decision,self.money_to_trade * self.leverage)
+                response = self.client.Order.Order_new(
+                    symbol="XBTUSD",
+                    side="Buy",
+                    orderQty=self.money_to_trade * self.leverage,
+                ).result()
+
+            self.logger.info("Response %s",response)
+
+        except Exception as e:
+            self.logger.error("Trading exception %s",str(e))
         
         return

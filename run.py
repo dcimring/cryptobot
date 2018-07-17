@@ -1,10 +1,11 @@
-from strategy import Strategy
+from strategy import MAStrategy
 from trader import Trader
 import bitmex
 import logging
 import logging.handlers
 import os
 
+# unit tests eg for crossabove and crossunder
 # todo - slack integration for messages
 # todo - cater for different strategies 
 
@@ -29,8 +30,8 @@ client = bitmex.bitmex(
 
 logger.debug('Connected to bitmex')
 
-strategy = Strategy(client, timeframe='1h')
-trader = Trader(client, strategy)
+strategy = MAStrategy(client, timeframe='1d', mas=1, mal=7)
+trader = Trader(client, strategy,money_to_trade=4000,leverage=1)
 trader.execute_trade()
 
 logger.info('Done')

@@ -6,6 +6,7 @@ import time
 import logging
 
 class MAStrategy():
+
     def __init__(self, client, timeframe='5m', mas=1, mal=7):
         self.client = client
         self.timeframe = timeframe
@@ -37,7 +38,8 @@ class MAStrategy():
         else:
             return False
 
-    def run(self):
+    def get_data(self):
+
         ohlcv_candles = pd.DataFrame(self.client.Trade.Trade_getBucketed(
             binSize=self.timeframe,
             symbol='XBTUSD',
@@ -47,9 +49,16 @@ class MAStrategy():
 
         # reverse param was needed in order to get the latest values
         # now we need to sort them into date order so that MA calcs work correctly
+
         ohlcv_candles.set_index(['timestamp'], inplace=True)
         ohlcv_candles.sort_index(inplace=True)
+
+        return ohlcv_candles
+
+    def run(self):
         
+        ohlcv_candles = self.get_data()
+
         # macd, signal, hist = talib.MACD(ohlcv_candles.close.values, 
         #                                 fastperiod = 8, slowperiod = 28, signalperiod = 9)
         

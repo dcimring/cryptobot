@@ -49,11 +49,9 @@ class MAStrategy():
         # now we need to sort them into date order so that MA calcs work correctly
         ohlcv_candles.set_index(['timestamp'], inplace=True)
         ohlcv_candles.sort_index(inplace=True)
-
-        #print(ohlcv_candles)
         
-        macd, signal, hist = talib.MACD(ohlcv_candles.close.values, 
-                                        fastperiod = 8, slowperiod = 28, signalperiod = 9)
+        # macd, signal, hist = talib.MACD(ohlcv_candles.close.values, 
+        #                                 fastperiod = 8, slowperiod = 28, signalperiod = 9)
         
         # mas = talib.SMA(ohlcv_candles.close.values, timeperiod=self.mas)
         # mal = talib.SMA(ohlcv_candles.close.values, timeperiod=self.mal)

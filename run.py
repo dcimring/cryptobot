@@ -6,8 +6,8 @@ import logging.handlers
 import os
 
 # unit tests eg for crossabove and crossunder
-# todo - slack integration for messages
 # todo - cater for different strategies 
+# todo - add image to slack message
 
 logger = logging.getLogger('cryptobot')
 logger.setLevel(logging.DEBUG)

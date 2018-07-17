@@ -4,6 +4,7 @@ import numpy as np
 import bitmex
 import time
 import logging
+import slack
 
 class Trader():
     def __init__(self, client, strategy, money_to_trade=100, leverage=5):
@@ -17,6 +18,7 @@ class Trader():
         
         decision = self.strategy.run()
         self.logger.info('Strategy %s decision %s',self.strategy.name, decision)
+        slack.send('Strategy %s decision %s :fire:' % (self.strategy.name, decision))
         
         try:
             if decision == "SELL":

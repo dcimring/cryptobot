@@ -28,6 +28,7 @@ class Trader():
                     side="Sell",
                     orderQty=self.money_to_trade * self.leverage,
                 ).result()
+                self.logger.info("Response %s",response)
 
             if decision == "BUY":
                 self.logger.info("Trying to %s %0.2f",decision,self.money_to_trade * self.leverage)
@@ -36,8 +37,7 @@ class Trader():
                     side="Buy",
                     orderQty=self.money_to_trade * self.leverage,
                 ).result()
-
-            self.logger.info("Response %s",response)
+                self.logger.info("Response %s",response)
 
         except Exception as e:
             self.logger.error("Trading exception %s",str(e))

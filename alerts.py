@@ -1,3 +1,10 @@
+import warnings
+
+warnings.filterwarnings("ignore", message="numpy.dtype size changed")
+warnings.filterwarnings("ignore", message="numpy.ufunc size changed")
+
+# RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility
+
 import slack
 from strategy import MAStrategy
 import bitmex

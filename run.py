@@ -3,6 +3,8 @@ import warnings
 warnings.filterwarnings("ignore", message="numpy.dtype size changed")
 warnings.filterwarnings("ignore", message="numpy.ufunc size changed")
 
+# RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility
+
 from strategy import MAStrategy
 from trader import Trader
 import bitmex

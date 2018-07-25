@@ -4,6 +4,10 @@ import bitmex
 import logging
 import logging.handlers
 import os
+import warnings
+
+warnings.filterwarnings("ignore", message="numpy.dtype size changed")
+warnings.filterwarnings("ignore", message="numpy.ufunc size changed")
 
 # unit tests eg for crossabove and crossunder
 # todo - cater for different strategies 

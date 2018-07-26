@@ -30,14 +30,14 @@ ma21 = ohlc.close.rolling(window=21).mean()[-1]
 actions = ""
 
 if close >= ma7:
-    actions += "LONG "
+    actions += "LONG(1,7) "
 else:
-    actions += "SHORT "
+    actions += "SHORT(1,7) "
 
 if ma10 >= ma21:
-    actions += "LONG "
+    actions += "LONG(10,21) "
 else:
-    actions += "SHORT "
+    actions += "SHORT(10,21) "
 
-slack.send("Close %0.1f 7Day %0.1f 10Day %0.1f 21Day %0.1f %s" % (close, ma7, ma10, ma21, actions))
+slack.send("%0.1f (close) %0.1f (7d) %0.1f (10d) %0.1f (21d) %s" % (close, ma7, ma10, ma21, actions))
 

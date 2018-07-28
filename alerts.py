@@ -35,7 +35,7 @@ else:
     actions += "MA(1,7) SHORT "
 
 if ma10 >= ma21:
-    actions += "MA(10,21) LONG "
+    actions += "MA(10,21) LONG\n"
 else:
     actions += "MA(10,21) SHORT "
 

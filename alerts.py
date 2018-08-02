@@ -20,7 +20,7 @@ client = bitmex.bitmex(
     api_secret=api_secret
 )
 
-ohlc = MAStrategy(client,timeframe='1d').get_data()
+ohlc = MAStrategy(client,timeframe='1d').get_data(symbol='XBTUSD')
 
 close = ohlc.close[-1]
 ma7 = ohlc.close.rolling(window=7).mean()[-1]

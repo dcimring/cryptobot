@@ -38,11 +38,11 @@ class MAStrategy():
         else:
             return False
 
-    def get_data(self):
+    def get_data(self, symbol='XBTUSD'):
 
         ohlcv_candles = pd.DataFrame(self.client.Trade.Trade_getBucketed(
             binSize=self.timeframe,
-            symbol='XBTUSD',
+            symbol=symbol,
             count=50,
             reverse=True
         ).result()[0])

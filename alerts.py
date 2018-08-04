@@ -9,8 +9,8 @@ import slack
 from strategy import MAStrategy
 import bitmex
 import os
+from time import sleep
 
-#slack.send('Hello from test :fire:')
 
 api_key, api_secret = os.environ['BITMEX_API_KEY'], os.environ['BITMEX_API_SECRET']
 
@@ -20,24 +20,27 @@ client = bitmex.bitmex(
     api_secret=api_secret
 )
 
-ohlc = MAStrategy(client,timeframe='1d').get_data(symbol='XBTUSD')
+alerts = [
+    {'Name':'BTC','Symbol':'XBTUSD', 'Fast':1, 'Slow': 7},
+    {'Name':'BTC','Symbol':'XBTUSD', 'Fast':10, 'Slow': 21},
+    {'Name':'ETH','Symbol':'ETHU18', 'Fast':1, 'Slow': 7},
+    {'Name':'BCH','Symbol':'BCHU18', 'Fast':1, 'Slow': 7},
+    {'Name':'LTC','Symbol':'LTCU18', 'Fast':1, 'Slow': 14},
+    {'Name':'EOS','Symbol':'EOSU18', 'Fast':1, 'Slow': 14},
+    {'Name':'XRP','Symbol':'XRPU18', 'Fast':1, 'Slow': 14},
+]
 
-close = ohlc.close[-1]
-ma7 = ohlc.close.rolling(window=7).mean()[-1]
-ma10 = ohlc.close.rolling(window=10).mean()[-1]
-ma21 = ohlc.close.rolling(window=21).mean()[-1]
+msg = 'Trades:\n'
 
-actions = ""
+for alert in alerts:
+    ohlc = MAStrategy(client,timeframe='1d').get_data(symbol=alert['Symbol'],count=alert['Slow']+2)
+    fast = ohlc.close.rolling(window=alert['Fast']).mean()[-1]
+    slow = ohlc.close.rolling(window=alert['Slow']).mean()[-1]
+    if fast >= slow:
+        direction = 'Long'
+    else:
+        direction = 'Short'
+    msg += "%s (%d,%d) %s\n" % (alert['Name'],alert['Fast'],alert['Slow'],direction)
+    sleep(0.5)
 
-if close >= ma7:
-    actions += "MA(1,7) LONG\n"
-else:
-    actions += "MA(1,7) SHORT "
-
-if ma10 >= ma21:
-    actions += "MA(10,21) LONG\n"
-else:
-    actions += "MA(10,21) SHORT "
-
-slack.send("%0.1f (close)\n%0.1f (7d)\n %0.1f (10d)\n %0.1f (21d)\n %s" % (close, ma7, ma10, ma21, actions))
-
+slack.send(msg)

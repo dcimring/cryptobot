@@ -31,10 +31,10 @@ alerts = [
 ]
 
 msg = 'Trades:\n'
-extra = ''
 strategy = MAStrategy(client,timeframe='1d')
 
 for alert in alerts:
+    extra = ''
     ohlc = strategy.get_data(symbol=alert['Symbol'],count=alert['Slow']+2)
     fast = ohlc.close.rolling(window=alert['Fast']).mean()
     slow = ohlc.close.rolling(window=alert['Slow']).mean()

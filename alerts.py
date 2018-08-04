@@ -31,16 +31,21 @@ alerts = [
 ]
 
 msg = 'Trades:\n'
+extra = ''
+strategy = MAStrategy(client,timeframe='1d')
 
 for alert in alerts:
-    ohlc = MAStrategy(client,timeframe='1d').get_data(symbol=alert['Symbol'],count=alert['Slow']+2)
-    fast = ohlc.close.rolling(window=alert['Fast']).mean()[-1]
-    slow = ohlc.close.rolling(window=alert['Slow']).mean()[-1]
-    if fast >= slow:
+    ohlc = strategy.get_data(symbol=alert['Symbol'],count=alert['Slow']+2)
+    fast = ohlc.close.rolling(window=alert['Fast']).mean()
+    slow = ohlc.close.rolling(window=alert['Slow']).mean()
+    if fast[-1] >= slow[-1]:
         direction = 'Long'
+        if strategy.crossabove(fast,slow): extra="*"
     else:
         direction = 'Short'
-    msg += "%s (%d,%d) %s\n" % (alert['Name'],alert['Fast'],alert['Slow'],direction)
+        if strategy.crossunder(fast,slow): extra="*"
+        
+    msg += "%s (%d,%d) %s%s\n" % (alert['Name'],alert['Fast'],alert['Slow'],direction,extra)
     sleep(0.5)
 
 slack.send(msg)

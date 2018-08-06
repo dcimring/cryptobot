@@ -4,6 +4,7 @@ import numpy as np
 import bitmex
 import time
 import logging
+from IPython.core.debugger import set_trace
 
 class MAStrategy():
 
@@ -50,6 +51,7 @@ class MAStrategy():
         # reverse param was needed in order to get the latest values
         # now we need to sort them into date order so that MA calcs work correctly
 
+        #set_trace()
         ohlcv_candles.set_index(['timestamp'], inplace=True)
         ohlcv_candles.sort_index(inplace=True)
 

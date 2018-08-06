@@ -10,6 +10,7 @@ from strategy import MAStrategy
 import bitmex
 import os
 from time import sleep
+from IPython.core.debugger import set_trace
 
 
 api_key, api_secret = os.environ['BITMEX_API_KEY'], os.environ['BITMEX_API_SECRET']
@@ -21,13 +22,13 @@ client = bitmex.bitmex(
 )
 
 alerts = [
-    {'Name':'BTC','Symbol':'XBTUSD', 'Fast':1, 'Slow': 7},
-    {'Name':'BTC','Symbol':'XBTUSD', 'Fast':10, 'Slow': 21},
-    {'Name':'ETH','Symbol':'ETHU18', 'Fast':1, 'Slow': 7},
-    {'Name':'BCH','Symbol':'BCHU18', 'Fast':1, 'Slow': 7},
-    {'Name':'LTC','Symbol':'LTCU18', 'Fast':1, 'Slow': 14},
-    {'Name':'EOS','Symbol':'EOSU18', 'Fast':1, 'Slow': 14},
-    {'Name':'XRP','Symbol':'XRPU18', 'Fast':1, 'Slow': 14},
+    {'Name':'BTC','Symbol':'.BXBT', 'Fast':1, 'Slow': 7},
+    {'Name':'BTC','Symbol':'.BXBT', 'Fast':10, 'Slow': 21},
+    {'Name':'ETH','Symbol':'.ETHXBT', 'Fast':1, 'Slow': 7},
+    {'Name':'BCH','Symbol':'.BCHXBT', 'Fast':1, 'Slow': 7},
+    {'Name':'LTC','Symbol':'.LTCXBT', 'Fast':1, 'Slow': 14},
+    {'Name':'EOS','Symbol':'.EOSXBT', 'Fast':1, 'Slow': 14},
+    {'Name':'XRP','Symbol':'.XRPXBT', 'Fast':1, 'Slow': 14},
 ]
 
 msg = 'Trades:\n'

@@ -4,7 +4,7 @@ import numpy as np
 import bitmex
 import time
 import logging
-from IPython.core.debugger import set_trace
+#from IPython.core.debugger import set_trace
 
 class MAStrategy():
 

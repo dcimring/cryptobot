@@ -10,7 +10,7 @@ from strategy import MAStrategy
 import bitmex
 import os
 from time import sleep
-from IPython.core.debugger import set_trace
+#from IPython.core.debugger import set_trace
 
 
 api_key, api_secret = os.environ['BITMEX_API_KEY'], os.environ['BITMEX_API_SECRET']

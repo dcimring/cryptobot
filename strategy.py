@@ -8,12 +8,13 @@ import logging
 
 class MAStrategy():
 
-    def __init__(self, client, timeframe='5m', mas=1, mal=7):
+    def __init__(self, client, timeframe='5m', mas=1, mal=7, ema=False):
         self.client = client
         self.timeframe = timeframe
         self.name = "MA(%d,%d)" % (mas,mal)
         self.mas=mas
         self.mal=mal
+        self.ema=ema
         self.logger = logging.getLogger('cryptobot')
         
 
@@ -67,8 +68,12 @@ class MAStrategy():
         # mas = talib.SMA(ohlcv_candles.close.values, timeperiod=self.mas)
         # mal = talib.SMA(ohlcv_candles.close.values, timeperiod=self.mal)
 
-        mas = ohlcv_candles.close.rolling(window=self.mas).mean()
-        mal = ohlcv_candles.close.rolling(window=self.mal).mean()
+        if self.ema:
+            mas = ohlcv_candles.close.ewm(span=self.mas, adjust=False).mean()
+            mal = ohlcv_candles.close.ewm(span=self.mal, adjust=False).mean()
+        else:
+            mas = ohlcv_candles.close.rolling(window=self.mas).mean()
+            mal = ohlcv_candles.close.rolling(window=self.mal).mean()
 
         self.logger.debug('Closing prices %s',ohlcv_candles.close.values)
         self.logger.debug('%s day MA is %0.2f',self.mas,mas[-1])

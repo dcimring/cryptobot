@@ -52,7 +52,7 @@ else:
     direction = 'Short'
     if strategy.crossunder(ohlc.close,high): extra="*"
 
-msg += "BTC within %0.1f%% of %dd high %s%s\n" % (tolerance*100,lookback,direction,extra)
+msg += "BTC %0.1f%% of %dd high %s%s\n" % (tolerance*100,lookback,direction,extra)
 
 for alert in alerts:
     extra = ''

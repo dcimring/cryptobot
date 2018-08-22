@@ -22,7 +22,7 @@ client = bitmex.bitmex(
 )
 
 alerts = [
-    {'Name':'BTC','Symbol':'.BXBT', 'Fast':1, 'Slow': 7, 'EMA': True},
+    {'Name':'BTC','Symbol':'.BXBT', 'Fast':1, 'Slow': 7, 'EMA': False},
     {'Name':'BTC','Symbol':'.BXBT', 'Fast':10, 'Slow': 21, 'EMA': False},
     {'Name':'ETH','Symbol':'.ETHXBT', 'Fast':1, 'Slow': 7, 'EMA': False},
     {'Name':'BCH','Symbol':'.BCHXBT', 'Fast':1, 'Slow': 7, 'EMA': False},

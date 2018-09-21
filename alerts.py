@@ -26,6 +26,7 @@ alerts = [
     {'Name':'BTC','Symbol':'.BXBT', 'Fast':10, 'Slow': 21, 'EMA': False},
     {'Name':'BTC','Symbol':'.BXBT', 'Fast':1, 'Slow': 4, 'EMA': False},
     {'Name':'ETH','Symbol':'.ETHXBT', 'Fast':1, 'Slow': 7, 'EMA': False},
+    {'Name':'ETH','Symbol':'.ETHXBT', 'Fast':1, 'Slow': 14, 'EMA': False},
     {'Name':'BCH','Symbol':'.BCHXBT', 'Fast':1, 'Slow': 7, 'EMA': False},
     {'Name':'LTC','Symbol':'.LTCXBT', 'Fast':1, 'Slow': 14, 'EMA': False},
     {'Name':'EOS','Symbol':'.EOSXBT', 'Fast':1, 'Slow': 14, 'EMA': False},
